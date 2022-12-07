@@ -1,4 +1,4 @@
-from utilities.classes import Tournament, Match, Fighter, Belt
+from utilities.classes import Category, Match, Fighter, Belt
 
 class TestBeltClass:
     dummy = Belt(0)
@@ -69,3 +69,36 @@ class TestMatchClass:
         self.not_ready_match.resolve_match(2)
         assert self.not_ready_match.is_resolved() == True
         assert self.not_ready_match._winner == dummy3
+
+class TestCategoryClass:
+    # df = dummy_fighter
+    df1 = Fighter("dummy1", 50.1, 3, 50, "F")
+    df2 = Fighter("dummy2", 50.2, 3, 51, "F")
+    df3 = Fighter("dummy3", 50.3, 3, 52, "F")
+    df4 = Fighter("dummy4", 50.4, 3, 53, "F")
+    print(df1, df2, df3, df4)
+    fighter_list = [df1, df2, df3, df4]
+    dcategory = Category(fighter_list)
+
+    def test_if_its_possible_to_return_fighters(self):
+        assert self.dcategory.return_fighters() == [self.df1, self.df2, self.df3, self.df4]
+
+    def test_if_its_possible_to_remove_fighter(self):
+        self.dcategory.remove_fighter(self.df1, self.df2)
+        assert self.dcategory.return_fighters() == [self.df3, self.df4]
+        self.dcategory.remove_fighter(self.df3)
+        assert self.dcategory.return_fighters() == [self.df4,]
+
+    def test_if_its_possible_to_add_fighter(self):
+        self.df5 = Fighter("dummy5", 50.5, 3, 54, "F")
+        self.df6 = Fighter("dummy6", 50.6, 3, 55, "F")
+        self.dcategory.add_fighter(self.df5, self.df6)
+        assert self.dcategory.return_fighters() == [self.df4, self.df5, self.df6]
+
+    def test_if_we_can_create_proper_matches(self):
+        self.dcategory.create_matches()
+        assert self.dcategory.return_fighters() == []
+        assert self.dcategory.__str__() == (
+            Match(self.df2, self.df3).__str__() + "\n" + Match(self.df4, self.df5).__str__() + "\n"
+        )
+

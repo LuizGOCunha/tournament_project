@@ -134,26 +134,66 @@ class Match:
 
 
 class Category:
-    def __init__(self) -> None:
-        self._fighters = []
+    '''A class that intiates with a list of fighters that will work like a staging area to create a list
+     of matches in the future. Then, it will advance those matches until it has nothing but one match 
+     with one winner. He will be the category winner.'''
+    def __init__(self, fighter_list:"list[Fighter]" = []) -> None:
+        self._fighters = fighter_list
+        self._matches_are_ready = False
 
-    def add_fighter(self, fighter):
-        if type(fighter) == Fighter:
-            self._fighters.append(fighter)
-        else:
-            print("New fighter must be a Fighter data type")
+    def add_fighter(self, *fighters: Fighter):
+        '''Add fighters to the original list of fighters that will be later used to create matches'''
+        for fighter in fighters:
+            if type(fighter) == Fighter:
+                self._fighters.append(fighter)
+            else:
+                raise TypeError("New fighter must be a Fighter data type")
     
     def return_fighters(self):
         return self._fighters
+
+    def remove_fighter(self, *fighters: Fighter) -> None:
+        '''Function that creates a list through *args that progressively removes all specified fighter 
+        values in the original staging area'''
+        for fighter in fighters:
+            self._fighters.remove(fighter)
     
     def create_matches(self):
+        '''Create matches based on the fighters on this category. If the number of fighters is uneven
+        it will return a match with one fighter alone.'''
+        # Here we need to iterate half the times the length of the list of fighters
+        # The reason is because we will be using 2 items at the same time
+        # for that we need a for loop, C style
         self._matches = []
-        fighters_to_be_arranged = []
-        for fighter in self.return_fighters():
-            fighters_to_be_arranged.append(fighter)
-            if len(fighters_to_be_arranged) == 2:
-                arranged_match = Match(fighters_to_be_arranged[0], fighters_to_be_arranged[1])
-                self._matches.append(arranged_match)
+        # Initiate counter
+        i=0
+        list_of_fighters = self.return_fighters()
+        # Disregard Python logic
+        for _ in list_of_fighters:
+            # Make sure we only run the code every other iteration
+            if i%2 == 0:
+                # try and except so the code doesnt break when we reach the end of uneven list
+                try:
+                    fighter1 = list_of_fighters[i]
+                    fighter2 = list_of_fighters[i+1]
+                    new_match = Match(fighter1, fighter2)
+                    self._matches.append(new_match)
+                    self.remove_fighter(fighter1, fighter2)
+                except IndexError:
+                    fighter1 = list_of_fighters[i]
+                    new_match = Match(fighter1,)
+                    self._matches.append(new_match)
+                    self.remove_fighter(fighter1)
+            # Make the counter increase
+            i+=1 
+        self._matches_are_ready = True
+
+    def return_matches(self):
+        return self._matches
+
+    def matches_are_ready(self):
+        # Pedantic, surely, but better safe than sorry.
+        return self._matches_are_ready
 
     def check_for_winner(self):
         if len(self._matches) == 1:
@@ -161,6 +201,15 @@ class Category:
             if final_match._resolved:
                 print(f"Category winner is {final_match._winner._name}")
 
+    def __str__(self) -> str:
+        if self.matches_are_ready():
+            return_string = ""
+            for match in self.return_matches():
+                return_string += match.__str__() + "\n"
+            return return_string
+        else:
+            return self.return_fighters().__str__()
+        
 
 
 if __name__ == "__main__":
