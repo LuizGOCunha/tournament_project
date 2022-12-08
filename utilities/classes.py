@@ -1,3 +1,5 @@
+import uuid
+
 class Belt:
     '''A class of Belt, created so we can have a mroe strict choice, instead of having open strings'''
     colors = ["White", "Blue", "Purple", "Brown", "Black"]
@@ -15,16 +17,23 @@ class Belt:
 
 class Fighter:
     '''Class that holds informations of all fighters in memory, its methods change and return info'''
-    def __init__(self, name:str, weight:float, belt_number:int, age:int, sex:str) -> None:
+    def __init__(self, name:str, weight:float, belt_number:int, age:int, sex:str, uid:uuid.UUID=False) -> None:
         self._name = name
         self._weight = float(weight)
         # Belt number are 0 to 4, representing white to black
         self._belt = Belt(belt_number)
         self._age = age
+        # Here we test if the sex obeys the the binary categories
         if sex == "M" or sex == "F":
             self._sex = sex
         else: 
             raise ValueError("Sex must be either 'M' or 'F'")
+        # Creates new UID if the Fighter doesnt have one pulled from a data base
+        if not uid:
+            self._id = uuid.uuid4()
+        else: 
+            self._id = uid
+
 
 #    def check_ageclass(self):
 #        age = self._age
@@ -43,6 +52,9 @@ class Fighter:
 #
 #        else:
 #            print("idade inválida")
+
+    def return_id(self) -> uuid.UUID:
+        return self._id
 
     def change_name(self, new_name:str) -> None:
         self._name = new_name
@@ -87,6 +99,14 @@ class Match:
         self._fighter1 = fighter1
         self._fighter2 = fighter2
         self._resolved = False
+
+    def return_fighters(self) -> tuple:
+        if self.is_ready():
+            return (self._fighter1, self._fighter2)
+        elif self._fighter1:
+            return (self._fighter1,)
+        else:
+            return (self._fighter2,)
 
     def is_ready(self) -> bool:
         '''if both fighters are stablished, the match is ready'''
@@ -134,15 +154,15 @@ class Match:
 
 
 class Category:
-    '''A class that intiates with a list of fighters that will work like a staging area to create a list
+    '''A class that intiates with a fighters_list of fighters that will work like a staging area to create a fighters_list
      of matches in the future. Then, it will advance those matches until it has nothing but one match 
      with one winner. He will be the category winner.'''
-    def __init__(self, fighter_list:"list[Fighter]" = []) -> None:
+    def __init__(self, fighter_list:"fighters_list[Fighter]" = []) -> None:
         self._fighters = fighter_list
         self._matches_are_ready = False
 
     def add_fighter(self, *fighters: Fighter):
-        '''Add fighters to the original list of fighters that will be later used to create matches'''
+        '''Add fighters to the original fighters_list of fighters that will be later used to create matches'''
         for fighter in fighters:
             if type(fighter) == Fighter:
                 self._fighters.append(fighter)
@@ -153,7 +173,7 @@ class Category:
         return self._fighters
 
     def remove_fighter(self, *fighters: Fighter) -> None:
-        '''Function that creates a list through *args that progressively removes all specified fighter 
+        '''Function that creates a fighters_list through *args that progressively removes all specified fighter 
         values in the original staging area'''
         for fighter in fighters:
             self._fighters.remove(fighter)
@@ -161,39 +181,30 @@ class Category:
     def create_matches(self):
         '''Create matches based on the fighters on this category. If the number of fighters is uneven
         it will return a match with one fighter alone.'''
-        # Here we need to iterate half the times the length of the list of fighters
-        # The reason is because we will be using 2 items at the same time
-        # for that we need a for loop, C style
-        self._matches = []
-        # Initiate counter
-        i=0
-        list_of_fighters = self.return_fighters()
-        # Disregard Python logic
-        for _ in list_of_fighters:
-            # Make sure we only run the code every other iteration
+        fighters_list = self.return_fighters()
+        i = 0
+        matches = []
+        for _ in fighters_list:
             if i%2 == 0:
-                # try and except so the code doesnt break when we reach the end of uneven list
                 try:
-                    fighter1 = list_of_fighters[i]
-                    fighter2 = list_of_fighters[i+1]
-                    new_match = Match(fighter1, fighter2)
-                    self._matches.append(new_match)
-                    self.remove_fighter(fighter1, fighter2)
+                    new_match = Match(fighters_list[i], fighters_list[i+1])
+                    matches.append(new_match)
+                    print(new_match)
                 except IndexError:
-                    fighter1 = list_of_fighters[i]
-                    new_match = Match(fighter1,)
-                    self._matches.append(new_match)
-                    self.remove_fighter(fighter1)
-            # Make the counter increase
-            i+=1 
-        self._matches_are_ready = True
+                    new_match = Match(fighters_list[i])
+                    matches.append(new_match)
+                    print(new_match)
+            i+=1
+        self._matches = matches
+            
+        self._matches_ready = True
 
     def return_matches(self):
         return self._matches
 
     def matches_are_ready(self):
         # Pedantic, surely, but better safe than sorry.
-        return self._matches_are_ready
+        return self._matches_ready
 
     def check_for_winner(self):
         if len(self._matches) == 1:
