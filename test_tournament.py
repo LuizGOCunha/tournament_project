@@ -117,10 +117,50 @@ class TestCategoryClass:
         # Test if we are dealing with the same fighters in those matches
         first_fighter_of_first_match = matches[0].return_fighters()[0]
         second_fighter_of_first_match = matches[0].return_fighters()[1]
-        only_fighter_of_second_match = matches[1].return_fighters()[0]
+        first_fighter_of_second_match = matches[1].return_fighters()[0]
         assert first_fighter_of_first_match.return_id() == self.df4.return_id()
         assert second_fighter_of_first_match.return_id() == self.df5.return_id()
-        assert only_fighter_of_second_match.return_id() == self.df6.return_id()
+        assert first_fighter_of_second_match.return_id() == self.df6.return_id()
+
+    def test_if_its_possible_to_impose_list_of_fighters_to_create_matches(self):
+        ddcategory = Category()
+        ddf1 = Fighter("doubledummy1", 99.9, 0, 30, "F")
+        ddf2 = Fighter("doubledummy2", 99.9, 0, 30, "F")
+        ddcategory.create_matches([ddf1, ddf2])
+        assert len(ddcategory.return_matches()) == 1
+        fighters = ddcategory.return_matches()[0].return_fighters()
+        fighter1 = fighters[0]
+        fighter2 = fighters[1]
+        assert fighter1.return_id() == ddf1.return_id()
+        assert fighter2.return_id() == ddf2.return_id()
+
+    def test_if_its_possible_to_resolve_the_matches(self):
+        # We have 2 matches on our category, we give the winning numbers to the method, starting on the first match
+        self.dcategory.resolve_category(1,2)
+        winner_of_the_first_match = self.dcategory.return_matches()[0].return_winner()
+        winner_of_the_second_match = self.dcategory.return_matches()[1].return_winner()
+        # Match 1: df4 is the winner
+        # Match 2: df6 is alone on an unready match, it will fight the loser of the match before, df5 wins
+        assert winner_of_the_first_match.return_id() == self.df4.return_id()
+        assert winner_of_the_second_match.return_id() == self.df5.return_id()
+
+    def test_if_its_possible_to_advance_to_next_phase(self):
+        self.dcategory.advance_category()
+        matches = self.dcategory.return_matches()
+        assert len(matches) == 1
+        first_fighter_of_finals = matches[0].return_fighters()[0]
+        second_fighter_of_finals = matches[0].return_fighters()[1]
+        assert first_fighter_of_finals.return_id() == self.df4.return_id()
+        assert second_fighter_of_finals.return_id() == self.df5.return_id()
+
+    def test_if_we_can_resolve_the_finals_and_check_for_winner(self):
+        self.dcategory.resolve_category(1)
+        self.dcategory.check_for_winner()
+        assert self.dcategory.is_resolved() == True
+        assert self.dcategory.return_winner().return_id() == self.df4.return_id()
+
+
+        
 
         
 
