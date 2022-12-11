@@ -17,7 +17,7 @@ class Belt:
 
 class Fighter:
     '''Class that holds informations of all fighters in memory, its methods change and return info'''
-    def __init__(self, name:str, weight:float, belt_number:int, age:int, sex:str, uid:uuid.UUID=False) -> None:
+    def __init__(self, name:str, weight:float, belt_number:int, age:int, sex:str, uid:uuid.UUID=None) -> None:
         self._name = name
         self._weight = float(weight)
         # Belt number are 0 to 4, representing white to black
@@ -101,6 +101,7 @@ class Match:
         self._resolved = False
 
     def return_fighters(self) -> tuple:
+        '''Returns a tuple of the present fighters'''
         if self.is_ready():
             return (self._fighter1, self._fighter2)
         elif self._fighter1:
@@ -162,12 +163,12 @@ class Match:
 
 
 class Category:
-    '''A class that intiates with a fighters_list of fighters that will work like a staging area to create a fighters_list
+    '''A class that initiates with a fighters_list of fighters that will work like a staging area to create a fighters_list
      of matches in the future. Then, it will advance those matches until it has nothing but one match 
      with one winner. He will be the category winner.'''
     def __init__(self, fighter_list:"list[Fighter]" = []) -> None:
         self._fighters = fighter_list
-        self._matches_are_ready = False # Not sure if we're going to use this after all
+        self._matches_ready = False # Not sure if we're going to use this after all
         self._matches_are_resolved = False
         self._category_is_resolved = False
 
@@ -214,26 +215,12 @@ class Category:
         self._matches_ready = True
 
     def return_matches(self):
-        return self._matches
+        if self.matches_are_ready():
+            return self._matches
 
     def matches_are_ready(self):
         # Pedantic, surely, but better safe than sorry.
         return self._matches_ready
-
-    def check_for_winner(self):
-        if len(self._matches) == 1:
-            final_match = self._matches[0]
-            if final_match._resolved:
-                print(f"Category winner is {final_match._winner._name}")
-
-    def __str__(self) -> str:
-        if self.matches_are_ready():
-            return_string = ""
-            for match in self.return_matches():
-                return_string += match.__str__() + "\n"
-            return return_string
-        else:
-            return self.return_fighters().__str__()
 
     def resolve_category(self, *match_winners) -> None:
         '''This method is responsible for resolving all matches in the category, then using the winners
@@ -244,8 +231,11 @@ class Category:
         if len(match_winners) == len(self.return_matches()):
             for match, winner in zip(matches, match_winners):
                 if match.is_ready():
+                    # This is for when the match is ready (has two fighters in it)
                     match.resolve_match(winner)
                 else:
+                    # This is for when the match is not ready (just one fighter in it)
+                    # In this case he will fight the loser of the previous match
                      missing_opponent = matches[i-1].return_loser()
                      match.add_fighter(missing_opponent)
                      match.resolve_match(winner)
@@ -254,6 +244,7 @@ class Category:
             raise ValueError("Number of winners must be equal to number of matches")
 
         self._matches_are_resolved = True
+        self.check_for_winner()
 
     def advance_category(self) -> None:
         '''This method creates new matches for a new phase based on resolved matches of a past phase'''
@@ -285,6 +276,20 @@ class Category:
             return self._winner
         else:
             raise TypeError("Category is not resolved yet")
+
+    
+    def __str__(self) -> str:
+        if self.matches_are_ready() and not self.is_resolved():
+            return_string = ""
+            for match in self.return_matches():
+                return_string += match.__str__() + "\n"
+            return return_string
+        elif self.is_resolved():
+            return "WINNER:" + self.return_winner().__str__() + "\n"
+
+        else:
+            return self.return_fighters().__str__() + "\n"
+
 
 
 if __name__ == "__main__":
