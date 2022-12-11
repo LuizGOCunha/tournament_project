@@ -4,7 +4,7 @@ This is a project that has the intention of automating the match creation for BJ
 - Match #Implemented!
 - Category #Implemented!
 - Tournament #Not implemented
- This project is used for studies and also to test the limits of my knowledge in pure python programming. Feel free to use it for whatever means.
+This project is used for studies and also to test the limits of my knowledge in pure python programming. Feel free to use it for whatever means.
 
 This readme will be updated along with the project.
 
