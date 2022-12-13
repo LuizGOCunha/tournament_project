@@ -34,25 +34,6 @@ class Fighter:
         else: 
             self._id = uid
 
-
-#    def check_ageclass(self):
-#        age = self._age
-#
-#        if (15<age<18):
-#            return "Juvenile"
-#
-#        elif (17<age<30):
-#            return "Adult"
-#
-#        elif (29<age<35):
-#            return "Master"
-#
-#        elif (34<age<41): 
-#            return "Senior"
-#
-#        else:
-#            print("idade inválida")
-
     def return_id(self) -> uuid.UUID:
         return self._id
 
