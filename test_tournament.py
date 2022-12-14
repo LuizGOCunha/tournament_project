@@ -1,5 +1,5 @@
 import uuid
-from utilities.classes import Category, Match, Fighter, Belt
+from utilities.classes import Tournament, Category, Match, Fighter, Belt
 
 class TestBeltClass:
     dummy = Belt(0)
@@ -158,6 +158,21 @@ class TestCategoryClass:
         self.dcategory.check_for_winner()
         assert self.dcategory.is_resolved() == True
         assert self.dcategory.return_winner().return_id() == self.df4.return_id()
+
+
+class TestTournamentClass:
+    df1 = Fighter(name="df1", weight="50", belt_number=0, age=20, sex="M")
+    df2 = Fighter(name="df2", weight="50", belt_number=0, age=20, sex="M")
+    df3 = Fighter(name="df3", weight="50", belt_number=0, age=20, sex="M")
+    df4 = Fighter(name="df4", weight="50", belt_number=0, age=20, sex="M")
+    df5 = Fighter(name="df5", weight="60", belt_number=0, age=20, sex="M")
+    df6 = Fighter(name="df6", weight="60", belt_number=0, age=20, sex="M")
+    df7 = Fighter(name="df7", weight="60", belt_number=0, age=20, sex="M")
+    df8 = Fighter(name="df8", weight="80", belt_number=0, age=20, sex="M")
+    df9 = Fighter(name="df9", weight="80", belt_number=0, age=20, sex="M")
+    dtournament = Tournament()
+
+    
 
 
         

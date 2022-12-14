@@ -276,64 +276,113 @@ class Tournament:
     '''Class that is responsible for creating and organizing different Categories based on sex,
      age and weight. It will receive a group of fighters and organize them in their respective
      Categories, based on the characteristics in their Fighter object.'''
-    # Creating the values below with a null value just so we can use them in the following comparations
-    sex = ""
-    age = 0
-    weight = 0.0
-    sex_categories = {
-        "Male": (sex=="M"),
-        "Female": (sex=="F")
-     }
-    age_categories = {
-        "Juvenile": (15<=age<18),
-        "Adult": (18<=age<30),
-        "Master": (30<=age<41),
-        "Senior": (age>=41)
-    }
-    # Weight categories vary for each age and sex category
-    # We will have to create different ones according to the rules
-    weight_categories_female = {
-        "Rooster": (weight<=48.5),
-        "Light Feather": (48.5<=weight<53.5),
-        "Feather": (53.5<=weight<58.5),
-        "Light": (58.5<=weight<64.0),
-        "Middle": (64.0<=weight<69.0),
-        "Medium Heavy": (69.0<=weight<74.0),
-        "Heavy": (74.0<=weight<79.3),
-        "Super Heavy": (79.3<=weight)
-    }
-    weight_categories_juvenile_female = {
-        "Rooster": (weight<=44.3),
-        "Light Feather": (44.3<=weight<48.3),
-        "Feather": (48.3<=weight<52.6),
-        "Light": (52.6<=weight<56.5),
-        "Middle": (56.5<=weight<60.5),
-        "Medium Heavy": (60.5<=weight<65.0),
-        "Heavy": (65.0<=weight<69.0),
-        "Super Heavy": (69.0<=weight)
-    }
-    weight_categories_male = {
-        "Rooster": (weight<=57.5),
-        "Light Feather": (57.5<=weight<64.0),
-        "Feather": (64.0<=weight<70.0),
-        "Light": (70.0<=weight<76.0),
-        "Middle": (76.0<=weight<82.3),
-        "Medium Heavy": (82.3<=weight<88.3),
-        "Heavy": (88.3<=weight<94.3),
-        "Super Heavy": (94.3<=weight<100.3),
-        "Ultra Heavy": (100.3<=weight)
-    }
-    weight_categories_juvenile_male = {
-        "Rooster": (weight<=53.5),
-        "Light Feather": (53.5<=weight<58.5),
-        "Feather": (58.5<=weight<64.0),
-        "Light": (64.0<=weight<69.0),
-        "Middle": (69.0<=weight<74.0),
-        "Medium Heavy": (74.0<=weight<79.3),
-        "Heavy": (79.3<=weight<84.3),
-        "Super Heavy": (84.3<=weight<89.3),
-        "Ultra Heavy": (89.3<=weight)
-    }
+    # All the code below was created using faulty logic, trying to evade a "multiple if/else" situation
+    # Must be refactured
+    
+    #sex = ""
+    #age = 0
+    #weight = 0.0
+    #sex_classes = {
+    #    "Male": (sex=="M"),
+    #    "Female": (sex=="F")
+    # }
+    #age_classes = {
+    #    "Juvenile": (15<=age<18),
+    #    "Adult": (18<=age<30),
+    #    "Master": (30<=age<41),
+    #    "Senior": (age>=41)
+    #}
+    ## Weight categories vary for each age and sex category
+    ## We will have to create different ones according to the rules
+    #weight_classes_female = {
+    #    "Rooster": (weight<=48.5),
+    #    "Light Feather": (48.5<=weight<53.5),
+    #    "Feather": (53.5<=weight<58.5),
+    #    "Light": (58.5<=weight<64.0),
+    #    "Middle": (64.0<=weight<69.0),
+    #    "Medium Heavy": (69.0<=weight<74.0),
+    #    "Heavy": (74.0<=weight<79.3),
+    #    "Super Heavy": (79.3<=weight)
+    #}
+    #weight_classes_juvenile_female = {
+    #    "Rooster": (weight<=44.3),
+    #    "Light Feather": (44.3<=weight<48.3),
+    #    "Feather": (48.3<=weight<52.6),
+    #    "Light": (52.6<=weight<56.5),
+    #    "Middle": (56.5<=weight<60.5),
+    #    "Medium Heavy": (60.5<=weight<65.0),
+    #    "Heavy": (65.0<=weight<69.0),
+    #    "Super Heavy": (69.0<=weight)
+    #}
+    #weight_classes_male = {
+    #    "Rooster": (weight<=57.5),
+    #    "Light Feather": (57.5<=weight<64.0),
+    #    "Feather": (64.0<=weight<70.0),
+    #    "Light": (70.0<=weight<76.0),
+    #    "Middle": (76.0<=weight<82.3),
+    #    "Medium Heavy": (82.3<=weight<88.3),
+    #    "Heavy": (88.3<=weight<94.3),
+    #    "Super Heavy": (94.3<=weight<100.3),
+    #    "Ultra Heavy": (100.3<=weight)
+    #}
+    #weight_classes_juvenile_male = {
+    #    "Rooster": (weight<=53.5),
+    #    "Light Feather": (53.5<=weight<58.5),
+    #    "Feather": (58.5<=weight<64.0),
+    #    "Light": (64.0<=weight<69.0),
+    #    "Middle": (69.0<=weight<74.0),
+    #    "Medium Heavy": (74.0<=weight<79.3),
+    #    "Heavy": (79.3<=weight<84.3),
+    #    "Super Heavy": (84.3<=weight<89.3),
+    #    "Ultra Heavy": (89.3<=weight)
+    #}
+    ## Here we will separate the fighters in their respective categories, creating a Category object after it's done
+    #active_categories = {}
+
+    #def __init__(self, fighter_list:"list[Fighter]", absolute_fighter_list:"list[Fighter]") -> None:
+    #    # Fighter list that will obey category standards
+    #    self.fighter_list = fighter_list
+    #    # Fighter list that will obey open weight standards
+    #    self.absolute_fighter_list = absolute_fighter_list
+    #    for fighter in fighter_list:
+    #        self.determine_category(fighter, absolute=False)
+    #    for fighter in absolute_fighter_list:
+    #        self.determine_category(fighter, absolute=True)
+            
+
+    def determine_category(self, fighter:Fighter):
+        sex = fighter.return_sex()
+        age = fighter.return_age()
+        weight = fighter.return_weight()
+        # This string will be created later to classify the fighter category
+        # It should appear like this: "sexclass-ageclass-weightclass"
+        category_string = ""
+        # If Male and Juvenile
+        if sex=="M" and 15<=age<18:
+            category_string += "M-"
+            age_class_name = self.class_check(self.age_classes, age=age)
+            category_string += f"{age_class_name}-"
+            weight_class_name = self.class_check(self.weight_classes_juvenile_male, weight=weight)
+            category_string += f"{weight_class_name}"
+                
+        # If Male and Adult (older than 18, not the age class)
+        elif sex=="M" and 18<=age:
+            pass
+        # If Female and Juvenile
+        elif sex=="F" and 15<=age<18:
+            pass
+        # If Female and Adult (older than 18, not the age class)
+        elif sex=="F" and 18<=age:
+            pass
+
+    def class_check(self, classes:dict, age:int=None, weight:float=None) -> str:
+        '''This class receives a dictionary of classes:class_checks and returns the apropriate string
+        value to classify by. The age and weight category must be set up depending on which kind of
+        class are you trying to check.'''
+        for class_name, class_check in classes.values():
+            if class_check:
+                return class_name
+
 
 if __name__ == "__main__":
     pass
