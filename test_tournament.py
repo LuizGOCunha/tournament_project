@@ -263,3 +263,9 @@ class TestTournamentClass:
         assert brownbelt_category == [self.df12,self.df13,self.df14]
         purplebelt_category = category_dict["F-Master-Absolute-Purple"]
         assert purplebelt_category == [self.df15,self.df16,self.df17,self.df18]
+
+    def test_if_we_can_create_category_objects_in_category_dict(self):
+        self.dtournament.create_category_objects()
+        category_dict = self.dtournament.return_active_categories()
+        for category in category_dict.values():
+            assert type(category) == Category

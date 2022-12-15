@@ -458,6 +458,19 @@ class Tournament:
             else:
                 self._active_absolute_categories[category_string].append(fighter)
 
+    def create_category_objects(self):
+        '''Method that transforms the list of fighters in the category dictionaries into a Category
+        object that can initialize the tournament.'''
+        # Normal categories
+        category_dict = self.return_active_categories()
+        for category_name, category_fighters in category_dict.items():
+            category_dict[category_name] = Category(category_fighters)
+        
+        # Absolute categories
+        absolute_category_dict = self.return_active_absolute_categories()
+        for category_name, category_fighters in absolute_category_dict.items():
+            category_dict[category_name] = Category(category_fighters)
+
 
 if __name__ == "__main__":
     pass
