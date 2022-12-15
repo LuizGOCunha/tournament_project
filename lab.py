@@ -1,4 +1,3 @@
-d = {1:[2,3,4]}
+from model.belt import Belt
 
-d[1].append(5)
-print(d[1])
+Belt(1)

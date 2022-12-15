@@ -1,5 +1,10 @@
 import uuid
-from utilities.classes import Tournament, Category, Match, Fighter, Belt
+
+from model.belt import Belt
+from model.fighter import Fighter
+from model.match import Match
+from model.category import Category
+from model.tournament import Tournament
 
 class TestBeltClass:
     dummy = Belt(0)
