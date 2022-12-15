@@ -1,8 +1,7 @@
 from random import randint
 from utilities.classes import Fighter, Match, Category
-from utilities.functions import upload_to_db
 
-# Simple manual testing so we can be sure it is working as intended (it is)
+# Simple manual testing so we can be absolutely sure it is working as intended (it is)
 
 f1 = Fighter("f1", weight=50.5, belt_number=2, age=40, sex="M")
 f2 = Fighter("f2", weight=50.5, belt_number=2, age=40, sex="M")

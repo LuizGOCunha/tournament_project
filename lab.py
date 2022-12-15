@@ -1,11 +1,4 @@
-c = 0
-d = {"a": (c>20)}
+d = {1:[2,3,4]}
 
-def func(d):
-    c=30
-    if d["a"]:
-        print("True!")
-    else:
-        print("False")
-
-func(d)
+d[1].append(5)
+print(d[1])
