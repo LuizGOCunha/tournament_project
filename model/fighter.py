@@ -10,7 +10,7 @@ class Fighter:
         # Belt number are 0 to 4, representing white to black
         self._belt = Belt(belt_number)
         self._age = age
-        # Here we test if the sex obeys the the binary categories
+        # Here we test if the sex obeys the binary categories
         if sex == "M" or sex == "F":
             self._sex = sex
         else: 

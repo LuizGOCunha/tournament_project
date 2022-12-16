@@ -1,5 +1,5 @@
-from random import randint
-from utilities.classes import Fighter, Match, Category
+from model.fighter import Fighter
+from model.category import Category
 
 # Simple manual testing so we can be absolutely sure it is working as intended (it is)
 

@@ -70,3 +70,16 @@ Use:
     }
 }
 
+Tournament: A class that takes a great number of fighters, categorizes them in weight, age, sex and belt classes, then creating a string to classify these fighters, and adding that string as a key for their category in a dictionary incorporated in the class. When you call this dictionary using each key, it should return a list object with all the fighter objects that that category belongs to. So it becomes a lot more dynamic, one can also call the create_category() method to turn the lists in the dict into Category objects using said list, then calling those objects when one needs to start the tournament.
+Arguments:
+- fighter_list: A list of fighters that will be fully categorized | list[Fighter]
+- absolute_fighter_list: A list of fighters that belong to the open weight class, they be categorized normally, except for the weight, which will hold only the value "Absolute" in their category name. | list[Fighter]
+Methods:
+- determine_category: This method will create a string name for the fighter category, based on the properties present in the Fighter object
+- check_weight_class_female: Returns the weight class for adult females
+- check_weight_class_male: Returns the weight class for adult males
+- check_weight_class_juvenile_female: Returns the weight class for juvenile females
+- check_weight_class_juvenile_male: Returns the weight class for juvenile males
+- check_age_class: Return the age class of a fighter
+- add_to_active_categories: Adds a fighter into the active categories, be it absolute weight or not
+- create_category_objects: Runs through the active categories and turns the fighter list present in them into category objects that can used to advance the tournament.

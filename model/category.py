@@ -7,7 +7,7 @@ class Category:
      with one winner. He will be the category winner.'''
     def __init__(self, fighter_list:"list[Fighter]" = []) -> None:
         self._fighters = fighter_list
-        self._matches_ready = False # Not sure if we're going to use this after all
+        self._matches_ready = False 
         self._matches_are_resolved = False
         self._category_is_resolved = False
 
