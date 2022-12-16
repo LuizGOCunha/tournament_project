@@ -83,3 +83,19 @@ Methods:
 - check_age_class: Return the age class of a fighter
 - add_to_active_categories: Adds a fighter into the active categories, be it absolute weight or not
 - create_category_objects: Runs through the active categories and turns the fighter list present in them into category objects that can used to advance the tournament.
+Use:
+{
+    tournament = Tournament(fighter_list, absolute_fighter_list)
+    tournament.create_category_objects()
+    weight_categories = tournament.return_active_categories()
+    absolute_categories = tournament.return_active_absolute_categories()
+    for categories in weight_categories.values():
+    {
+        # Run categories
+    }
+    for categories in absolute_categories:
+    {
+        # Run categories
+    }
+    # One may also unite both weight and absolute categories into one dict and running them both.
+}
