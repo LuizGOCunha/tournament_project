@@ -1,9 +1,10 @@
-This is a project that has the intention of automating the match creation for BJJ tournaments. It is simple, but also effective and flexible. It creates a stack of objects that is useful for more and more complex tournaments. The stack from simple to more complex goes as follows:
+This is a project that has the intention of automating the match creation for BJJ tournaments. It is simple, but also effective and flexible. The project is also a case study for the creation of a MVC architecture from scratch, a difficult task that will require a lot of hardwork and focus, but one i am focused on finishing.
+The model classes, from simple to more complex, goes as follows:
 - Belt #Implemented!
 - Fighter #Implemented!
 - Match #Implemented!
 - Category #Implemented!
-- Tournament #Not implemented
+- Tournament #Implemented!
 This project is used for studies and also to test the limits of my knowledge in pure python programming. Feel free to use it for whatever means.
 
 This readme will be updated along with the project.

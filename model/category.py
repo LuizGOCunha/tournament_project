@@ -19,7 +19,7 @@ class Category:
             else:
                 raise TypeError("New fighter must be a Fighter data type")
     
-    def return_fighters(self):
+    def return_fighters(self) -> Fighter:
         return self._fighters
 
     def remove_fighter(self, *fighters: Fighter) -> None:
@@ -43,17 +43,15 @@ class Category:
                 try:
                     new_match = Match(fighters_list[i], fighters_list[i+1])
                     matches.append(new_match)
-                    print(new_match)
                 except IndexError:
                     new_match = Match(fighters_list[i])
                     matches.append(new_match)
-                    print(new_match)
             i+=1
         self._matches = matches
             
         self._matches_ready = True
 
-    def return_matches(self):
+    def return_matches(self) -> "list[Match]":
         if self.matches_are_ready():
             return self._matches
 
@@ -61,12 +59,32 @@ class Category:
         # Pedantic, surely, but better safe than sorry.
         return self._matches_ready
 
+    def resolve_next_match(self, winner:int):
+        '''This method is responsible for resolving the next available match, in that way the usar is
+        able to resolve the matches one by one.'''
+        matches = self.return_matches()
+        i= 0
+        for match in matches:
+            if match.is_resolved():
+                pass
+            elif match.is_ready():
+                match.resolve_match(winner)
+            elif not match.is_ready():
+                missing_opponent = matches[i-1].return_loser()
+                match.add_fighter(missing_opponent)
+                print(match._fighter1)
+                print(match._fighter2)
+                match.resolve_match(winner)
+                print("winner:", match.return_winner())
+            i+=1
+
     def resolve_category(self, *match_winners) -> None:
         '''This method is responsible for resolving all matches in the category, then using the winners
-        and losers to create new matches, so advancing the category to the next phase.'''
+        and losers to create new matches, so advancing the category to the next phase. Use this method
+        only if you haven't resolved any matches.'''
         matches = self.return_matches()
-        # checks if we have theright amount of winners for the matches
         i = 0
+        # checks if we have theright amount of winners for the matches
         if len(match_winners) == len(self.return_matches()):
             for match, winner in zip(matches, match_winners):
                 if match.is_ready():
