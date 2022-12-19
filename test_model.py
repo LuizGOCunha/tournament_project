@@ -160,10 +160,8 @@ class TestCategoryClass:
         winner_of_the_first_match = dcategory2.return_matches()[0].return_winner()
         # Match 1: fighter1 (tdf1) wins
         assert winner_of_the_first_match.return_id() == tdf1.return_id()
-        dcategory2.resolve_next_match(3)
+        dcategory2.resolve_next_match(2)
         winner_of_the_second_match = dcategory2.return_matches()[1].return_winner()
-        print(winner_of_the_second_match)
-        print(tdf2)
         # Match 2: tdf3 fights the loser of the previous match (tdf2), tdf2 wins
         assert winner_of_the_second_match.return_id() == tdf2.return_id() 
 

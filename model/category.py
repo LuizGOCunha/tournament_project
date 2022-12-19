@@ -64,18 +64,19 @@ class Category:
         able to resolve the matches one by one.'''
         matches = self.return_matches()
         i= 0
+        print("winning number first: ",winner)
         for match in matches:
+            # YOU DIDNJT STOP THE LOOP YOU GODAMN LOW IQ INDIVIDUAL!!!!!!!!!!
             if match.is_resolved():
                 pass
             elif match.is_ready():
                 match.resolve_match(winner)
+                return 0
             elif not match.is_ready():
                 missing_opponent = matches[i-1].return_loser()
                 match.add_fighter(missing_opponent)
-                print(match._fighter1)
-                print(match._fighter2)
                 match.resolve_match(winner)
-                print("winner:", match.return_winner())
+                return 0
             i+=1
 
     def resolve_category(self, *match_winners) -> None:
