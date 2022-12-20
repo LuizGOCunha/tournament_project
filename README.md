@@ -8,6 +8,12 @@ The model classes, from simple to more complex, goes as follows:
 After having established that, there are two ways of stablishing the communication between user and data, and both will be stablished:
 - Local Interface #InProgress
 - Web Application #InProgress
+Beyond that, to make the project more production ready, i also have these objectives:
+- Dockerize the project #NotImplemented
+- Connect a more complex database #NotImplemented
+- Create a basic frontend #NotImplemented
+- Host the project on the web #NotImplemented
+- Create an API that returns fighter info #NotImplemented
 This project is used for studies and also to test the limits of my knowledge in pure python programming. Feel free to use it for whatever means.
 
 This readme will be updated along with the project.
