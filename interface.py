@@ -4,9 +4,9 @@ from random import randint
 from model.fighter import Fighter
 from model.category import Category
 
+# Here we will try out the construction of a interface for the Tournament project
+
 # creates the master class through Tk
-
-
 class Category_interface(Tk):
     fighters = []
 
