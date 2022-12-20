@@ -66,7 +66,6 @@ class Category:
         i= 0
         print("winning number first: ",winner)
         for match in matches:
-            # YOU DIDNJT STOP THE LOOP YOU GODAMN LOW IQ INDIVIDUAL!!!!!!!!!!
             if match.is_resolved():
                 pass
             elif match.is_ready():
