@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Jiu Jitsu Tournament</title>
+  <link rel="stylesheet" type="text/css" href="style/index.css">
+</head>
+<body>
+  <header>
+    <h1>Place Holder Jiu Jitsu Tournament</h1>
+  </header>
+  <nav>
+    <ul>
+      <li><a href="#schedule">Schedule</a></li>
+      <li><a href="#results">Results</a></li>
+      <li><a href="#registration">Registration</a></li>
+    </ul>
+  </nav>
+  <main>
+    <section id="schedule">
+      <h2>Schedule</h2>
+      <table>
+        <tr>
+          <th>Time</th>
+          <th>Division</th>
+          <th>Match</th>
+        </tr>
+        <tr>
+          <td>9:00 AM</td>
+          <td>White Belt</td>
+          <td>John vs. Jane</td>
+        </tr>
+        <tr>
+          <td>10:00 AM</td>
+          <td>Blue Belt</td>
+          <td>Bob vs. Sue</td>
+        </tr>
+        <!-- more schedule entries -->
+      </table>
+    </section>
+    <section id="results">
+      <h2>Results</h2>
+      <table>
+        <tr>
+          <th>Division</th>
+          <th>Winner</th>
+        </tr>
+        <tr>
+          <td>White Belt</td>
+          <td>John</td>
+        </tr>
+        <tr>
+          <td>Blue Belt</td>
+          <td>Sue</td>
+        </tr>
+        <!-- more results -->
+      </table>
+    </section>
+    <section id="registration">
+      <h2>Registration</h2>
+      <form>
+        <label for="name">Name:</label><br>
+        <input type="text" id="name" name="name"><br>
+
+        <label for="age">Age:</label><br>
+        <input type="text" id="age" name="age"><br>
+
+        <label for="weight">Weight:</label><br>
+        <input type="text" id="weight" name="weight"><br>
+
+        <label>Sex:</label><br>
+        <input type="radio" name="sex" value="male" checked> Male<br>
+        <input type="radio" name="sex" value="female"> Female<br>
+        
+        <label for="belt">Belt:</label><br>
+        <select id="belt" name="belt">
+          <option value="white">White</option>
+          <option value="blue">Blue</option>
+          <option value="purple">Purple</option>
+          <option value="brown">Brown</option>
+          <option value="black">Black</option>
+        </select><br>
+        <input type="submit" value="Submit">
+      </form> 
+    </section>
+  </main>
+  <footer>
+    <p>Copyright 2022 Jiu Jitsu Tournament</p>
+  </footer>
+  <script type="text/javascript" src="script/index.js"></script>
+</body>
+</html>
