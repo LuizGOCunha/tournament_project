@@ -2,6 +2,9 @@ from django.db import models
 
 # Create your models here.
 
+def save_fighter():
+    pass
+
 class FighterModel(models.Model):
     belt_choices = (
         (0, "White"),
@@ -20,3 +23,4 @@ class FighterModel(models.Model):
     age = models.DecimalField(max_digits=3, decimal_places=1)
     sex = models.CharField(max_length=1 ,choices=sex_choices)
     uid = models.UUIDField()
+    
