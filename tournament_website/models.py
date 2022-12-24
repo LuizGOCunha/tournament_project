@@ -1,9 +1,8 @@
 from django.db import models
 
+from .tournament_models.fighter import Fighter
 # Create your models here.
 
-def save_fighter():
-    pass
 
 class FighterModel(models.Model):
     belt_choices = (
@@ -23,4 +22,9 @@ class FighterModel(models.Model):
     age = models.DecimalField(max_digits=3, decimal_places=1)
     sex = models.CharField(max_length=1 ,choices=sex_choices)
     uid = models.UUIDField()
+
+
+    def convert_to_tournament_model(self):
+        fighter = Fighter(self.name, self.weight, self.belt, self.age, self.sex, self.uid)
+        return fighter
     

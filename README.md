@@ -11,10 +11,20 @@ After having established that, there are two ways of stablishing the communicati
 Beyond that, to make the project more production ready, i also have these objectives:
 - Dockerize the project #NotImplemented
 - Connect a more complex database #NotImplemented
-- Create a basic frontend #NotImplemented
+- Create a basic frontend #Implemented!
 - Host the project on the web #NotImplemented
 - Create an API that returns fighter info #NotImplemented
 This project is used for studies and also to test the limits of my knowledge in pure python programming. Feel free to use it for whatever means.
+
+##### ATTENTION! #####
+One should not confuse tournament_models with django models.
+The first ones are there to automate the tournament process.
+The second ones are there to interact with the Django framework and its database.
+They are linked by the fact that they may have to be converted into one another so that the web application can be linked with the internal logic.
+They have similar attributes, but their functions are different. They are similar, but not the same.
+
+##### REMEMBER! #####
+- API REST with endpoint "add-fighter" must be created as soon as possible
 
 This readme will be updated along with the project.
 

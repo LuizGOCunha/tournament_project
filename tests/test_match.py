@@ -1,5 +1,5 @@
-from model.match import Match
-from model.fighter import Fighter
+from tournament_website.tournament_models.match import Match
+from tournament_website.tournament_models.fighter import Fighter
 
 
 class TestMatchClass:

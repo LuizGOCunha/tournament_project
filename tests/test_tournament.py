@@ -1,6 +1,6 @@
-from model.fighter import Fighter
-from model.tournament import Tournament
-from model.category import Category
+from tournament_website.tournament_models.fighter import Fighter
+from tournament_website.tournament_models.tournament import Tournament
+from tournament_website.tournament_models.category import Category
 
 class TestTournamentClass:
     df1 = Fighter(name="df1", weight=50, belt_number=0, age=20, sex="M")

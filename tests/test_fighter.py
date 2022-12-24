@@ -1,6 +1,6 @@
 import uuid
 
-from model.fighter import Fighter
+from tournament_website.tournament_models.fighter import Fighter
 
 class TestFighterClass:
     dummy = Fighter(name="Dummy", weight=80, belt_number=3, age=18, sex="M")

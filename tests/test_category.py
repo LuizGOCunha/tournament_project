@@ -1,5 +1,5 @@
-from model.fighter import Fighter
-from model.category import Category
+from tournament_website.tournament_models.fighter import Fighter
+from tournament_website.tournament_models.category import Category
 
 class TestCategoryClass:
     # df = dummy_fighter
