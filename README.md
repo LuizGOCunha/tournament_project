@@ -1,4 +1,4 @@
-This is a project that has the intention of automating the match creation for BJJ tournaments. It is simple, but also effective and flexible. The project is also a case study for the creation of a MVC architecture from scratch, a difficult task that will require a lot of hardwork and focus, but one i am focused on finishing.
+This is a project that has the intention of automating the match creation for BJJ tournaments. It is simple, but also effective and flexible. It will be a page that will register users that can be fighters or not, one can make a registration and then become a fighter by registering in a Tournament. It will also hold an admin page where one can use the tournamente models to automate the organization of the tournament.
 The model classes, from simple to more complex, goes as follows:
 - Belt #Implemented!
 - Fighter #Implemented!
