@@ -62,7 +62,12 @@
     <p>Copyright 2022 Jiu Jitsu Tournament</p>
   </footer>
   <!-- i'm having trouble making django identify the location of the js file
-    However, my focus is not on frontend development, so i will leave this for the future 
-  <script type="text/javascript" src="{% static 'script/index.js' %}"></script> -->
+    However, my focus is not on frontend development, so i will leave this for the future
+   -->
 </body>
+{% if message %}
+  <script>
+    alert('{{message}}')
+  </script>
+{% endif %}
 </html>

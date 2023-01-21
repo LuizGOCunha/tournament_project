@@ -5,62 +5,17 @@
   </head>
   <body>
     <section>
-    <h1>Registration</h1>
-    <p>This is the home page of my website.</p>
-    <h2>Registration</h2>
+    <h1>User Registration</h1>
       <form id="registrationForm" method="post">
         {% csrf_token %}
-        <label for="name">Name:</label><br>
-        <input type="text" id="name" name="name"><br>
-
-        <label for="age">Age:</label><br>
-        <input type="text" id="age" name="age"><br>
-
-        <label for="weight">Weight:</label><br>
-        <input type="text" id="weight" name="weight"><br>
-
-        <label>Sex:</label><br>
-        <input type="radio" name="sex" value="male" checked> Male<br>
-        <input type="radio" name="sex" value="female"> Female<br>
-        
-        <label for="belt">Belt:</label><br>
-        <select id="belt" name="belt">
-          <option value="0">White</option>
-          <option value="1">Blue</option>
-          <option value="2">Purple</option>
-          <option value="3">Brown</option>
-          <option value="4">Black</option>
-        </select><br>
-        <input type="submit" value="Submit">
+        {{ form.as_p }}
+        <input type="submit" value="Submit" ></input>
       </form> 
+      {% if message %}
+        <script>
+          alert('{{message}}')
+        </script>
+      {% endif %}
     </section>
-
-    <script>
-        // Get the form element
-        const form = document.getElementById('registrationForm');
-      
-        // Add a submit event listener to the form
-        form.addEventListener('submit', function(event) {
-          // Prevent the default submit action
-          event.preventDefault();
-      
-          // Get the form data
-          const formData = new FormData(form);
-      
-          // Send an AJAX request to the server
-          fetch('/add-fighter/', {
-            method: 'POST',
-            body: formData
-          })
-          .then(function(response) {
-            return response.json();
-          })
-          .then(function(data) {
-            // Do something with the response data
-            console.log(data);
-          });
-        });
-      </script>
-
   </body>
 </html>
