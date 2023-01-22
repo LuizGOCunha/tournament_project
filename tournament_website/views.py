@@ -2,7 +2,6 @@ import uuid
 
 from django.shortcuts import render, redirect
 from django.http import JsonResponse
-from django.views.decorators.csrf import csrf_protect
 from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 
@@ -28,11 +27,14 @@ def registration(request):
                 username=request.POST['username'],
                 email=request.POST['email']
             )
-            # Message isnt being sent, have to figure out why
+            # Message isnt showing up, because i'm not able to send the context to rendering
             context['message'] = "User Created Successfully!"
-            return redirect("/", context=context)
+            # If i use render instead of redirect, i'm able to get access to the message
+            # However, its not ideal solution because it doesnt change url, only the template
+            # Have to find better solution in the future
+            return render(request, "index.html", context)
         else:
-            context['message'] = "Password Confirmation Failed. Passwords do no match."
+            context['message'] = "Password Confirmation Failed: Passwords do no match."
 
     return render(request, "registration.html", context)
 

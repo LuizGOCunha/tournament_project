@@ -1,4 +1,5 @@
 from django.db import models
+from django.contrib.auth.models import User
 
 from .tournament_models.fighter import Fighter
 # Create your models here.
@@ -22,6 +23,8 @@ class FighterModel(models.Model):
     age = models.DecimalField(max_digits=3, decimal_places=1)
     sex = models.CharField(max_length=1 ,choices=sex_choices)
     uid = models.UUIDField()
+    # Each Fighter model is related with a User model
+    user_profile = models.OneToOneField(User, on_delete=models.CASCADE)
 
 
     def convert_to_tournament_model(self):
