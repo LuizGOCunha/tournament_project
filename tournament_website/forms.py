@@ -7,7 +7,11 @@ class UserCreationForm(forms.Form):
     last_name = forms.CharField(max_length=150, required=True)
     email = forms.EmailField(max_length=200, required=True)
     password = forms.CharField(max_length=150, widget=forms.PasswordInput, required=True)
-    password_conf = forms.CharField(max_length=150, widget=forms.PasswordInput, required=True)
+    password_conf = forms.CharField(max_length=150, widget=forms.PasswordInput, required=True, label="Confirm your password")
+
+class SignInForm(forms.Form):
+    username = forms.CharField(max_length=150, required=True)
+    password = forms.CharField(max_length=150, widget=forms.PasswordInput, required=True)
 
 class FighterCreationForm(forms.Form):
     belt_choices = (

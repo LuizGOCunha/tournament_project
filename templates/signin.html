@@ -1,0 +1,19 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Sign In</title>
+  </head>
+  <body>
+    <h1>Sign In</h1>
+    <form method='POST'>
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Submit"></input>
+    </form>
+    {% if message %}
+      <script>
+        alert('{{message}}')
+      </script>
+    {% endif %}
+  </body>
+</html>

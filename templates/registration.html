@@ -6,7 +6,7 @@
   <body>
     <section>
     <h1>User Registration</h1>
-      <form id="registrationForm" method="post">
+      <form method="post">
         {% csrf_token %}
         {{ form.as_p }}
         <input type="submit" value="Submit" ></input>

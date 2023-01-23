@@ -1,20 +1,23 @@
-{% load static %}
-
 <!DOCTYPE html>
 <html>
 <head>
   <title>Jiu Jitsu Tournament</title>
- <!-- <link rel="stylesheet" type="text/css" href="{% static 'style/index.css' %}"> -->
 </head>
 <body>
   <header>
     <h1>Place Holder Jiu Jitsu Tournament</h1>
+    {% if authenticated %}
+      <h2>Hello {{authenticated.first_name}}</h2>
+    {% endif %}
   </header>
   <nav>
     <ul>
       <li><a href="#schedule">Schedule</a></li>
-      <li><a href="#results">Results</a></li>
+      <li><a href="{% url 'signin' %}">Sign In</a></li>
       <li><a href="{% url 'registration' %}">Registration</a></li>
+      {% if authenticated %}
+      <li><a href="{% url 'signout' %}">Signout</a></li>
+      {% endif %}
     </ul>
   </nav>
   <main>
