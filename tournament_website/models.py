@@ -24,7 +24,7 @@ class FighterModel(models.Model):
     sex = models.CharField(max_length=1 ,choices=sex_choices)
     uid = models.UUIDField()
     # Each Fighter model is related with a User model
-    user_profile = models.OneToOneField(User, on_delete=models.CASCADE)
+    user_profile = models.OneToOneField(User, on_delete=models.CASCADE, default=None)
 
 
     def convert_to_tournament_model(self):

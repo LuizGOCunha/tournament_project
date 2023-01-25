@@ -10,7 +10,7 @@ class TestIndexView:
         assert response.status_code == 200
 
     # Test if we are able to create a user, log the user in,
-    # if we can logout and if user has correct info
+    # we can logout and if user has correct info
 
         
     
