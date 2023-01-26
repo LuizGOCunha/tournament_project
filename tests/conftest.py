@@ -1,4 +1,5 @@
 import pytest
+from django.contrib.auth.models import User
 
 # Scopes available for fixture:
 # "function" - Run once per function
@@ -19,3 +20,14 @@ def registration_data():
     }
     print('******************************')
     return registration_form_data
+
+@pytest.fixture(scope="session")
+def dummy_user(db):
+    user = User.objects.create_user(
+        first_name='First Name',
+        last_name='Last Name',
+        username='Username',
+        email='email@test.com',
+        password='Passw0rd*',
+    )
+    return user
