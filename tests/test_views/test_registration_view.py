@@ -15,7 +15,7 @@ class TestRegistrationView:
 
     def test_if_view_is_accessible(self):
         response = self.client.get(reverse("registration"))
-        assert response.status_code == 200, "Could not access page"
+        assert response.status_code == 200, "Could not connect to view"
     
     def test_to_see_if_we_can_create_user_with_correct_info(self, registration_data):
         request = self.factory.post(path=reverse('registration'), data=registration_data)

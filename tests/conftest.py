@@ -21,13 +21,13 @@ def registration_data():
     print('******************************')
     return registration_form_data
 
-@pytest.fixture(scope="session")
-def dummy_user(db):
+@pytest.fixture()
+def dummy_user(db, registration_data):
     user = User.objects.create_user(
-        first_name='First Name',
-        last_name='Last Name',
-        username='Username',
-        email='email@test.com',
-        password='Passw0rd*',
+        first_name=registration_data['first_name'],
+        last_name=registration_data['last_name'],
+        username=registration_data['username'],
+        email=registration_data['email'],
+        password=registration_data['password'],
     )
     return user
