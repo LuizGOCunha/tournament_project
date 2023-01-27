@@ -25,7 +25,7 @@ class FighterCreationForm(forms.Form):
         ("M", "Male"),
         ("F", "Female")
     )
-
+    
     weight = forms.FloatField()
     belt = forms.ChoiceField(choices=belt_choices, widget=forms.Select)
     age = forms.IntegerField(max_value=100, min_value=15)

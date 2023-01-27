@@ -7,7 +7,7 @@ from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.db import IntegrityError
 
-from .models import FighterModel
+from .models import FighterDjangoModel
 from .forms import UserCreationForm, SignInForm
 
 # Create your views here.
@@ -67,14 +67,14 @@ def signout(request:HttpRequest):
 
 def add_fighter(request:HttpRequest):
     pass
-    '''if request.method == "POST":
-        name = request.POST.get('name')
-        weight = request.POST.get('name')
-        belt = request.POST.get('name')
-        age = request.POST.get('name')
+    if request.method == "POST":
+        name = request.POST['name']
+        weight = request.POST['weight']
+        belt = request.POST['belt']
+        age = request.POST['age']
         uid = uuid.uuid4()
 
-        fighter = FighterModel(name=name, weight=weight, belt=belt, age=age, uid=uid)
+        fighter = FighterDjangoModel(name=name, weight=weight, belt=belt, age=age, uid=uid)
         fighter.save()
 
-        return JsonResponse({"status":"success"})'''
+        return JsonResponse({"status":"success"})
