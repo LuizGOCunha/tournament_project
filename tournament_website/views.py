@@ -8,7 +8,7 @@ from django.http import HttpRequest, HttpResponse
 from django.db import IntegrityError
 
 from .models import FighterDjangoModel
-from .forms import UserCreationForm, SignInForm
+from .forms import UserCreationForm, SignInForm, FighterCreationForm
 
 # Create your views here.
 
@@ -65,16 +65,31 @@ def signout(request:HttpRequest):
     logout(request)
     return redirect("/")
 
-def add_fighter(request:HttpRequest):
-    pass
-    if request.method == "POST":
-        name = request.POST['name']
-        weight = request.POST['weight']
-        belt = request.POST['belt']
-        age = request.POST['age']
-        uid = uuid.uuid4()
+def addfighter(request:HttpRequest):
+    context = {}
+    context['form'] = FighterCreationForm
+    if request.user.is_authenticated:
+        if request.method == "POST":
+            try:
+                name = request.POST['name']
+                weight = request.POST['weight']
+                belt = request.POST['belt']
+                age = request.POST['age']
+                sex = request.POST['sex']
 
-        fighter = FighterDjangoModel(name=name, weight=weight, belt=belt, age=age, uid=uid)
-        fighter.save()
-
-        return JsonResponse({"status":"success"})
+                fighter = FighterDjangoModel(
+                    name=name, 
+                    weight=weight, 
+                    belt=belt, 
+                    age=age, 
+                    sex=sex,
+                    user=request.user
+                )
+                fighter.save()
+                context['message'] = "Fighter successfully registered"
+            except IntegrityError:
+                context['message'] = "User already is a registered fighter"
+    else:
+        context['message'] = "You must be logged in to access this page"
+        return redirect("/")
+    return render(request, "addfighter.html", context)

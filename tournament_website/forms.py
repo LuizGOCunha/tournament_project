@@ -25,8 +25,8 @@ class FighterCreationForm(forms.Form):
         ("M", "Male"),
         ("F", "Female")
     )
-    
-    weight = forms.FloatField()
-    belt = forms.ChoiceField(choices=belt_choices, widget=forms.Select)
-    age = forms.IntegerField(max_value=100, min_value=15)
-    sex = forms.ChoiceField(choices=sex_choices, widget=forms.Select)
+    name = forms.CharField(max_length=150, required=True)
+    weight = forms.DecimalField(max_digits=4, decimal_places=2, required=True)
+    belt = forms.ChoiceField(choices=belt_choices, widget=forms.Select, required=True)
+    age = forms.IntegerField(max_value=100, min_value=15, required=True)
+    sex = forms.ChoiceField(choices=sex_choices, widget=forms.Select, required=True)

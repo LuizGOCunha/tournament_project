@@ -14,7 +14,6 @@ class TestFighterDjangoModel:
             sex="M",
             user=dummy_user
         )
-        fighter.save()
         assert FighterDjangoModel.objects.count() == 1, "Fighter could not be created in database"
         assert fighter.user == dummy_user, "Fighter is not related to correct user"
         assert fighter.uid, "Fighter does not have UID"
