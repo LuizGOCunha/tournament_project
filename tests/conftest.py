@@ -1,6 +1,7 @@
 import pytest
-from django.contrib.auth.models import User
 
+from django.contrib.auth.models import User
+from tournament_website.models import FighterDjangoModel
 # Scopes available for fixture:
 # "function" - Run once per function
 # "class" - Run once per class of tests
@@ -31,3 +32,25 @@ def dummy_user(db, registration_data):
         password=registration_data['password'],
     )
     return user
+
+@pytest.fixture()
+def fighter_django_data():
+    fighter_data = {
+            'name': 'Fighter Name',
+            'weight': 50.3,
+            'age': 30,
+            'belt': 3,
+            'sex': 'M'
+    }
+    return fighter_data
+
+@pytest.fixture()
+def fighter_django_object(fighter_django_data):
+    fighter = FighterDjangoModel(
+        name=fighter_django_data['name'],
+        weight=fighter_django_data['weight'],
+        age=fighter_django_data['age'],
+        belt=fighter_django_data['belt'],
+        sex=fighter_django_data['sex']
+    )
+    return fighter

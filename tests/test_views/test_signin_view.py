@@ -1,6 +1,9 @@
+import pytest
+
 from django.test import Client, RequestFactory
 from django.urls import reverse
 
+@pytest.mark.django_db
 class TestSigninView:
     client = Client()
     factory = RequestFactory()

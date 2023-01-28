@@ -4,6 +4,7 @@ from django.test import Client, RequestFactory
 from django.urls import reverse
 from django.contrib.auth import login
 
+@pytest.mark.django_db
 class TestSignoutView:
     client = Client()
     factory = RequestFactory()
@@ -12,8 +13,7 @@ class TestSignoutView:
         response = self.client.get(reverse("signout"))
         # View ends in a redirection, so it should return 302
         assert response.status_code == 302, "Could not connect to view"
-
-    @pytest.mark.django_db    
+    
     def test_if_we_can_log_out_user(self, dummy_user, registration_data):
         self.client.login(
             username=registration_data['username'],
