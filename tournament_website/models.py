@@ -27,6 +27,7 @@ class FighterDjangoModel(models.Model):
         default=None, 
         blank=True, 
         null=True,
+        related_name="fighter"
     )
     name = models.CharField(max_length=150)
     # If number in database surpasses the maximum it returns a decimal.InvalidOperation Error \/
