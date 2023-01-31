@@ -18,6 +18,9 @@
       {% if authenticated %}
       <li><a href="{% url 'signout' %}">Signout</a></li>
       {% endif %}
+      {% if no_fighter %}
+      <li><a href="{% url 'addfighter' %}">Enlist as Fighter</a></li>
+      {% endif %}
     </ul>
   </nav>
   <main>
