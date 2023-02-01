@@ -16,11 +16,12 @@ def index(request:HttpRequest):
     context={}
     if request.user.is_authenticated:
         context['authenticated'] = request.user
+        # Weird logic! Clean it up later
         try:
             request.user.fighter
         except FighterDjangoModel.DoesNotExist:
             context['no_fighter'] = True
-            
+
     return render(request, "index.html", context)
 
 def registration(request:HttpRequest):
