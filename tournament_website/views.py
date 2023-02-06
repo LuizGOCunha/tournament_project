@@ -9,6 +9,7 @@ from django.db import IntegrityError
 from rest_framework.decorators import api_view
 from rest_framework.response import Response
 from rest_framework.request import Request
+from rest_framework.views import APIView
 
 from .models import FighterDjangoModel
 from .forms import UserCreationForm, SignInForm, FighterCreationForm
@@ -104,12 +105,3 @@ def addfighter(request:HttpRequest):
         return redirect("/")
     return render(request, "addfighter.html", context)
 
-# Should change this into an APIView class
-@api_view(['GET', 'POST'])
-def api_fighters_view(request:Request):
-    if request.GET.get:
-        print("*******************************************")
-    print(request.data)
-    all_objects = FighterDjangoModel.objects.all()
-    serializer = FighterSerializer(all_objects, many=True)
-    return Response(serializer.data)

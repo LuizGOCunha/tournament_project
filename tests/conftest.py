@@ -53,3 +53,18 @@ def fighter_django_object(fighter_django_data):
         sex=fighter_django_data['sex']
     )
     return fighter
+
+@pytest.fixture()
+def multiple_fighter_django_object(fighter_django_data):
+    fighter_list = []
+    for fighter in range(10):
+        fighter = FighterDjangoModel.objects.create(
+        name=fighter_django_data['name'],
+        weight=fighter_django_data['weight'],
+        age=fighter_django_data['age'],
+        belt=fighter_django_data['belt'],
+        sex=fighter_django_data['sex']
+        )
+        fighter_list.append(fighter)
+
+    return fighter_list

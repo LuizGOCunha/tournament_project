@@ -8,5 +8,5 @@ urlpatterns = [
     path('signin/', views.signin, name='signin'),
     path('signout/', views.signout, name='signout'),
     path('addfighter/', views.addfighter, name='addfighter'),
-    path('api/', views.api_fighters_view, name='api'),
+    path('api/', include(router.urls)),
 ]
