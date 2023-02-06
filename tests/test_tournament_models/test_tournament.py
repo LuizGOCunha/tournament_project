@@ -97,7 +97,6 @@ class TestTournamentClass:
         category_dict = self.dtournament.return_active_absolute_categories()
         assert type(category_dict) == dict
         categories = tuple(self.dtournament.return_active_absolute_categories().keys())
-        print(categories)
         assert categories == ("F-Master-Absolute-Black", "F-Master-Absolute-Brown", "F-Master-Absolute-Purple")
         blackbelt_category = category_dict["F-Master-Absolute-Black"]
         assert blackbelt_category == [self.df10,self.df11]

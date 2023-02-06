@@ -6,9 +6,13 @@ from django.contrib.auth import authenticate, login, logout
 from django.contrib.auth.models import User
 from django.http import HttpRequest, HttpResponse
 from django.db import IntegrityError
+from rest_framework.decorators import api_view
+from rest_framework.response import Response
+from rest_framework.request import Request
 
 from .models import FighterDjangoModel
 from .forms import UserCreationForm, SignInForm, FighterCreationForm
+from .serializers import FighterSerializer
 
 # Create your views here.
 
@@ -99,3 +103,13 @@ def addfighter(request:HttpRequest):
         context['message'] = "You must be logged in to access this page"
         return redirect("/")
     return render(request, "addfighter.html", context)
+
+# Should change this into an APIView class
+@api_view(['GET', 'POST'])
+def api_fighters_view(request:Request):
+    if request.GET.get:
+        print("*******************************************")
+    print(request.data)
+    all_objects = FighterDjangoModel.objects.all()
+    serializer = FighterSerializer(all_objects, many=True)
+    return Response(serializer.data)

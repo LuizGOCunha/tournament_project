@@ -19,7 +19,6 @@ def registration_data():
             'password': 'Passw0rd*',
             'password_conf': 'Passw0rd*'
     }
-    print('******************************')
     return registration_form_data
 
 @pytest.fixture()
@@ -46,7 +45,7 @@ def fighter_django_data():
 
 @pytest.fixture()
 def fighter_django_object(fighter_django_data):
-    fighter = FighterDjangoModel(
+    fighter = FighterDjangoModel.objects.create(
         name=fighter_django_data['name'],
         weight=fighter_django_data['weight'],
         age=fighter_django_data['age'],
