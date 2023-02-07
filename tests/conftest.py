@@ -33,6 +33,20 @@ def dummy_user(db, registration_data):
     return user
 
 @pytest.fixture()
+def multiple_users(db, registration_data):
+    user_list = []
+    for n in range(10):
+        user = User.objects.create_user(
+            first_name=registration_data['first_name'] + f'{n}',
+            last_name=registration_data['last_name'] + f'{n}',
+            username=registration_data['username'] + f'{n}',
+            email=registration_data['email'] + f'{n}',
+            password=registration_data['password'] + f'{n}',
+        )
+        user_list.append(user)
+    return user_list
+
+@pytest.fixture()
 def fighter_django_data():
     fighter_data = {
             'name': 'Fighter Name',

@@ -35,7 +35,7 @@ class FighterDjangoModel(models.Model):
     belt = models.IntegerField()
     age = models.IntegerField()
     sex = models.CharField(max_length=1 ,choices=sex_choices)
-    uid = models.UUIDField(default=uuid.uuid4())
+    uid = models.UUIDField(default=uuid.uuid4(),)
 
     def convert_to_tournament_model(self):
         fighter = Fighter(self.name, self.weight, self.belt, self.age, self.sex, self.uid)

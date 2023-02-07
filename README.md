@@ -13,7 +13,7 @@ Beyond that, to make the project more production ready, i also have these object
 - Connect a more complex database #NotImplemented
 - Create a basic frontend #Implemented!
 - Host the project on the web #NotImplemented
-- Create an API that returns fighter info #NotImplemented
+- Create an API that returns fighter/user info #Implemented!
 This project is used for studies and also to test the limits of my knowledge in pure python programming. Feel free to use it for whatever means.
 
 ##### ATTENTION! #####

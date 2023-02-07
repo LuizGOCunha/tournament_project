@@ -43,4 +43,3 @@ class TestFighterEndpoint:
         assert response.status_code == 201
         filter = FighterDjangoModel.objects.filter(name="Distinct Name")
         assert len(filter) == 1
-        breakpoint()
