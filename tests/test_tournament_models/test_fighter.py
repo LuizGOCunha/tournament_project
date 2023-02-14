@@ -2,6 +2,7 @@ import uuid
 
 from tournament_website.tournament_models.fighter import Fighter
 
+
 class TestFighterClass:
     dummy = Fighter(name="Dummy", weight=80, belt_number=3, age=18, sex="M")
 
@@ -10,7 +11,7 @@ class TestFighterClass:
         assert self.dummy.return_weight() == 80
         assert self.dummy.return_belt() == "Brown"
         assert self.dummy.return_age() == 18
-        assert self.dummy.return_sex() == "M" 
+        assert self.dummy.return_sex() == "M"
 
     def test_change_name(self):
         self.dummy.change_name("Dummy2")
@@ -39,5 +40,5 @@ class TestFighterClass:
 
     def test_uid(self):
         id = uuid.uuid4()
-        fighter = Fighter("dummy", 90.0, 2, 80, "M", uid = id)
-        assert fighter.return_id() == id 
+        fighter = Fighter("dummy", 90.0, 2, 80, "M", uid=id)
+        assert fighter.return_id() == id

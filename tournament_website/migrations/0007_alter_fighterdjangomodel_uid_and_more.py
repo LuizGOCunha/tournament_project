@@ -5,20 +5,21 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('tournament_website', '0006_alter_fighterdjangomodel_age_and_more'),
+        ("tournament_website", "0006_alter_fighterdjangomodel_age_and_more"),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='fighterdjangomodel',
-            name='uid',
-            field=models.UUIDField(default=uuid.UUID('1e8f5731-fa32-4da2-809e-f0bfa1197f6f')),
+            model_name="fighterdjangomodel",
+            name="uid",
+            field=models.UUIDField(
+                default=uuid.UUID("1e8f5731-fa32-4da2-809e-f0bfa1197f6f")
+            ),
         ),
         migrations.AlterField(
-            model_name='fighterdjangomodel',
-            name='weight',
+            model_name="fighterdjangomodel",
+            name="weight",
             field=models.DecimalField(decimal_places=2, max_digits=4),
         ),
     ]

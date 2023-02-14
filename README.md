@@ -1,3 +1,5 @@
+[![Code style: black](https://img.shields.io/badge/code%20style-black-000000.svg)](https://github.com/psf/black)
+
 This is a project that has the intention of automating the match creation for BJJ tournaments. It is simple, but also effective and flexible. It will be a page that will register users that can be fighters or not, one can make a registration and then become a fighter by registering in a Tournament. It will also hold an admin page where one can use the tournamente models to automate the organization of the tournament.
 The model classes, from simple to more complex, goes as follows:
 - Belt #Implemented!

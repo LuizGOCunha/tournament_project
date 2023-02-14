@@ -6,15 +6,16 @@ from tournament_website.tournament_models.category import Category
 
 # Here we will try out the construction of a interface for the Tournament project
 
+
 # creates the master class through Tk
 class Category_interface(Tk):
     fighters = []
 
-    def add_to_fighters(self, fighter:Fighter):
+    def add_to_fighters(self, fighter: Fighter):
         self.fighters.append(fighter)
 
     def dice_roll(self):
-        dice_roll = randint(1,20)
+        dice_roll = randint(1, 20)
         label.config(text=dice_roll)
 
     def create_fighter(self):
@@ -30,11 +31,11 @@ class Category_interface(Tk):
 
     def randomize_fighter(self):
         name = f"Fighter{randint(0,1000)}"
-        weight = float(randint(40,100))
-        belt = randint(0,4)
-        age = randint(15,50)
+        weight = float(randint(40, 100))
+        belt = randint(0, 4)
+        age = randint(15, 50)
         sex_options = ("M", "F")
-        sex = sex_options[randint(0,1)]
+        sex = sex_options[randint(0, 1)]
         fighter = Fighter(name, weight, belt, age, sex)
         label.config(text=f"{fighter.__str__()}")
 
@@ -51,12 +52,11 @@ class Category_interface(Tk):
         for match in matches:
             match_label = Label(root, text=f"{match.__str__():^40}")
             match_label.pack()
-        
 
     def create_form(self):
         # Forms
-        global name_entry, weight_entry, age_entry, sex_entry, belt_entry   
-        global name_label, weight_label, age_label, sex_label, belt_label   
+        global name_entry, weight_entry, age_entry, sex_entry, belt_entry
+        global name_label, weight_label, age_label, sex_label, belt_label
         name_label = Label(root, text="Fighter Name:")
         name_entry = Entry(root)
         weight_label = Label(root, text="Weight:")
@@ -86,17 +86,29 @@ class Category_interface(Tk):
         done_button.pack()
         global form_items
         form_items = (
-        name_entry, name_label, weight_entry, weight_label, age_entry, age_label, 
-        sex_entry, sex_label, belt_entry, belt_label, button, button2, done_button,
+            name_entry,
+            name_label,
+            weight_entry,
+            weight_label,
+            age_entry,
+            age_label,
+            sex_entry,
+            sex_label,
+            belt_entry,
+            belt_label,
+            button,
+            button2,
+            done_button,
         )
 
+
 root = Category_interface()
-root.geometry('800x600')
+root.geometry("800x600")
 
 root.create_form()
 
 global label
-label = Label(root, text="" )
+label = Label(root, text="")
 label.pack()
 
 root.mainloop()

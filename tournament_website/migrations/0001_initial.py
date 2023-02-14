@@ -4,23 +4,47 @@ from django.db import migrations, models
 
 
 class Migration(migrations.Migration):
-
     initial = True
 
-    dependencies = [
-    ]
+    dependencies = []
 
     operations = [
         migrations.CreateModel(
-            name='FighterModel',
+            name="FighterModel",
             fields=[
-                ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('name', models.CharField(max_length=100)),
-                ('weight', models.FloatField()),
-                ('belt', models.DecimalField(choices=[(0, 'White'), (1, 'Blue'), (2, 'Purple'), (3, 'Brown'), (4, 'Black')], decimal_places=1, max_digits=1)),
-                ('age', models.DecimalField(decimal_places=1, max_digits=3)),
-                ('sex', models.CharField(choices=[('M', 'Male'), ('F', 'Female')], max_length=1)),
-                ('uid', models.UUIDField()),
+                (
+                    "id",
+                    models.BigAutoField(
+                        auto_created=True,
+                        primary_key=True,
+                        serialize=False,
+                        verbose_name="ID",
+                    ),
+                ),
+                ("name", models.CharField(max_length=100)),
+                ("weight", models.FloatField()),
+                (
+                    "belt",
+                    models.DecimalField(
+                        choices=[
+                            (0, "White"),
+                            (1, "Blue"),
+                            (2, "Purple"),
+                            (3, "Brown"),
+                            (4, "Black"),
+                        ],
+                        decimal_places=1,
+                        max_digits=1,
+                    ),
+                ),
+                ("age", models.DecimalField(decimal_places=1, max_digits=3)),
+                (
+                    "sex",
+                    models.CharField(
+                        choices=[("M", "Male"), ("F", "Female")], max_length=1
+                    ),
+                ),
+                ("uid", models.UUIDField()),
             ],
         ),
     ]

@@ -5,30 +5,34 @@ import uuid
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
-        ('tournament_website', '0005_rename_user_profile_fighterdjangomodel_user_and_more'),
+        (
+            "tournament_website",
+            "0005_rename_user_profile_fighterdjangomodel_user_and_more",
+        ),
     ]
 
     operations = [
         migrations.AlterField(
-            model_name='fighterdjangomodel',
-            name='age',
+            model_name="fighterdjangomodel",
+            name="age",
             field=models.IntegerField(),
         ),
         migrations.AlterField(
-            model_name='fighterdjangomodel',
-            name='belt',
+            model_name="fighterdjangomodel",
+            name="belt",
             field=models.IntegerField(),
         ),
         migrations.AlterField(
-            model_name='fighterdjangomodel',
-            name='uid',
-            field=models.UUIDField(default=uuid.UUID('73ec1757-e16c-4fb3-a035-cd6ee9dccba8')),
+            model_name="fighterdjangomodel",
+            name="uid",
+            field=models.UUIDField(
+                default=uuid.UUID("73ec1757-e16c-4fb3-a035-cd6ee9dccba8")
+            ),
         ),
         migrations.AlterField(
-            model_name='fighterdjangomodel',
-            name='weight',
+            model_name="fighterdjangomodel",
+            name="weight",
             field=models.DecimalField(decimal_places=2, max_digits=3),
         ),
     ]

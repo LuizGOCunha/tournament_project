@@ -1,6 +1,7 @@
 from tournament_website.tournament_models.fighter import Fighter
 from tournament_website.tournament_models.category import Category
 
+
 class TestCategoryClass:
     # df = dummy_fighter
     df1 = Fighter("dummy1", 50.1, 3, 50, "F")
@@ -14,13 +15,20 @@ class TestCategoryClass:
     dcategory = Category(fighter_list)
 
     def test_if_its_possible_to_return_fighters(self):
-        assert self.dcategory.return_fighters() == [self.df1, self.df2, self.df3, self.df4]
+        assert self.dcategory.return_fighters() == [
+            self.df1,
+            self.df2,
+            self.df3,
+            self.df4,
+        ]
 
     def test_if_its_possible_to_remove_fighter(self):
         self.dcategory.remove_fighter(self.df1, self.df2)
         assert self.dcategory.return_fighters() == [self.df3, self.df4]
         self.dcategory.remove_fighter(self.df3)
-        assert self.dcategory.return_fighters() == [self.df4,]
+        assert self.dcategory.return_fighters() == [
+            self.df4,
+        ]
 
     def test_if_its_possible_to_add_fighter(self):
         self.dcategory.add_fighter(self.df5, self.df6)
@@ -53,7 +61,7 @@ class TestCategoryClass:
 
     def test_if_its_possible_to_resolve_the_matches(self):
         # We have 2 matches on our category, we give the winning numbers to the method, starting on the first match
-        self.dcategory.resolve_category(1,2)
+        self.dcategory.resolve_category(1, 2)
         winner_of_the_first_match = self.dcategory.return_matches()[0].return_winner()
         winner_of_the_second_match = self.dcategory.return_matches()[1].return_winner()
         # Match 1: df4 is the winner
@@ -75,7 +83,7 @@ class TestCategoryClass:
         dcategory2.resolve_next_match(2)
         winner_of_the_second_match = dcategory2.return_matches()[1].return_winner()
         # Match 2: tdf3 fights the loser of the previous match (tdf2), tdf2 wins
-        assert winner_of_the_second_match.return_id() == tdf2.return_id() 
+        assert winner_of_the_second_match.return_id() == tdf2.return_id()
 
     def test_if_its_possible_to_advance_to_next_phase(self):
         self.dcategory.advance_category()
@@ -91,4 +99,3 @@ class TestCategoryClass:
         self.dcategory.check_for_winner()
         assert self.dcategory.is_resolved() == True
         assert self.dcategory.return_winner().return_id() == self.df4.return_id()
-

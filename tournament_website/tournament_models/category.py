@@ -1,54 +1,56 @@
 from .fighter import Fighter
 from .match import Match
 
+
 class Category:
-    '''A class that initiates with a fighters_list of fighters that will work like a staging area to create a fighters_list
-     of matches in the future. Then, it will advance those matches until it has nothing but one match 
-     with one winner. He will be the category winner.'''
-    def __init__(self, fighter_list:"list[Fighter]" = []) -> None:
+    """A class that initiates with a fighters_list of fighters that will work like a staging area to create a fighters_list
+    of matches in the future. Then, it will advance those matches until it has nothing but one match
+    with one winner. He will be the category winner."""
+
+    def __init__(self, fighter_list: "list[Fighter]" = []) -> None:
         self._fighters = fighter_list
-        self._matches_ready = False 
+        self._matches_ready = False
         self._matches_are_resolved = False
         self._category_is_resolved = False
 
     def add_fighter(self, *fighters: Fighter):
-        '''Add fighters to the original fighters_list of fighters that will be later used to create matches'''
+        """Add fighters to the original fighters_list of fighters that will be later used to create matches"""
         for fighter in fighters:
             if type(fighter) == Fighter:
                 self._fighters.append(fighter)
             else:
                 raise TypeError("New fighter must be a Fighter data type")
-    
+
     def return_fighters(self) -> Fighter:
         return self._fighters
 
     def remove_fighter(self, *fighters: Fighter) -> None:
-        '''Function that creates a fighters_list through *args that progressively removes all specified fighter 
-        values in the original staging area'''
+        """Function that creates a fighters_list through *args that progressively removes all specified fighter
+        values in the original staging area"""
         for fighter in fighters:
             self._fighters.remove(fighter)
-    
-    def create_matches(self, imposed_list:"list[Fighter]"=None):
-        '''Create matches based on the fighters on this category. If the number of fighters is uneven
+
+    def create_matches(self, imposed_list: "list[Fighter]" = None):
+        """Create matches based on the fighters on this category. If the number of fighters is uneven
         it will return a match with one fighter alone. There is also a possibility to impose a determined
         List of fighters, instead of creating one from the properties initiated on the class (used to
-        advance the phase of the category)'''
+        advance the phase of the category)"""
         fighters_list = self.return_fighters()
         if imposed_list:
             fighters_list = imposed_list
         i = 0
         matches = []
         for _ in fighters_list:
-            if i%2 == 0:
+            if i % 2 == 0:
                 try:
-                    new_match = Match(fighters_list[i], fighters_list[i+1])
+                    new_match = Match(fighters_list[i], fighters_list[i + 1])
                     matches.append(new_match)
                 except IndexError:
                     new_match = Match(fighters_list[i])
                     matches.append(new_match)
-            i+=1
+            i += 1
         self._matches = matches
-            
+
         self._matches_ready = True
 
     def return_matches(self) -> "list[Match]":
@@ -59,12 +61,12 @@ class Category:
         # Pedantic, surely, but better safe than sorry.
         return self._matches_ready
 
-    def resolve_next_match(self, winner:int):
-        '''This method is responsible for resolving the next available match, in that way the usar is
-        able to resolve the matches one by one.'''
+    def resolve_next_match(self, winner: int):
+        """This method is responsible for resolving the next available match, in that way the usar is
+        able to resolve the matches one by one."""
         matches = self.return_matches()
-        i= 0
-        print("winning number first: ",winner)
+        i = 0
+        print("winning number first: ", winner)
         for match in matches:
             if match.is_resolved():
                 pass
@@ -72,16 +74,16 @@ class Category:
                 match.resolve_match(winner)
                 return 0
             elif not match.is_ready():
-                missing_opponent = matches[i-1].return_loser()
+                missing_opponent = matches[i - 1].return_loser()
                 match.add_fighter(missing_opponent)
                 match.resolve_match(winner)
                 return 0
-            i+=1
+            i += 1
 
     def resolve_category(self, *match_winners) -> None:
-        '''This method is responsible for resolving all matches in the category, then using the winners
+        """This method is responsible for resolving all matches in the category, then using the winners
         and losers to create new matches, so advancing the category to the next phase. Use this method
-        only if you haven't resolved any matches.'''
+        only if you haven't resolved any matches."""
         matches = self.return_matches()
         i = 0
         # checks if we have theright amount of winners for the matches
@@ -93,10 +95,10 @@ class Category:
                 else:
                     # This is for when the match is not ready (just one fighter in it)
                     # In this case he will fight the loser of the previous match
-                     missing_opponent = matches[i-1].return_loser()
-                     match.add_fighter(missing_opponent)
-                     match.resolve_match(winner)
-                i+=1
+                    missing_opponent = matches[i - 1].return_loser()
+                    match.add_fighter(missing_opponent)
+                    match.resolve_match(winner)
+                i += 1
         else:
             raise ValueError("Number of winners must be equal to number of matches")
 
@@ -104,7 +106,7 @@ class Category:
         self.check_for_winner()
 
     def advance_category(self) -> None:
-        '''This method creates new matches for a new phase based on resolved matches of a past phase'''
+        """This method creates new matches for a new phase based on resolved matches of a past phase"""
         winners = []
         matches = self.return_matches()
         for match in matches:
@@ -115,9 +117,9 @@ class Category:
         self._matches_are_resolved = False
 
     def check_for_winner(self) -> None:
-        '''This method checks if all matches were done and if there is only one match with one winner.
+        """This method checks if all matches were done and if there is only one match with one winner.
         That would mean that we have a category winner, and when that happens we need to instantiate some
-        necessary properties.'''
+        necessary properties."""
         # Check if theres only one match
         if len(self.return_matches()) == 1:
             # Check if the match is resolved
@@ -134,7 +136,6 @@ class Category:
         else:
             raise TypeError("Category is not resolved yet")
 
-    
     def __str__(self) -> str:
         if self.matches_are_ready() and not self.is_resolved():
             return_string = ""

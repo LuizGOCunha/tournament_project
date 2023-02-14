@@ -1,5 +1,6 @@
 from tournament_website.tournament_models.belt import Belt
 
+
 class TestBeltClass:
     dummy = Belt(0)
 

@@ -6,16 +6,19 @@ import django.db.models.deletion
 
 
 class Migration(migrations.Migration):
-
     dependencies = [
         migrations.swappable_dependency(settings.AUTH_USER_MODEL),
-        ('tournament_website', '0001_initial'),
+        ("tournament_website", "0001_initial"),
     ]
 
     operations = [
         migrations.AddField(
-            model_name='fightermodel',
-            name='user_profile',
-            field=models.OneToOneField(default=None, on_delete=django.db.models.deletion.CASCADE, to=settings.AUTH_USER_MODEL),
+            model_name="fightermodel",
+            name="user_profile",
+            field=models.OneToOneField(
+                default=None,
+                on_delete=django.db.models.deletion.CASCADE,
+                to=settings.AUTH_USER_MODEL,
+            ),
         ),
     ]

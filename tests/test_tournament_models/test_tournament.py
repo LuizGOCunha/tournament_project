@@ -2,6 +2,7 @@ from tournament_website.tournament_models.fighter import Fighter
 from tournament_website.tournament_models.tournament import Tournament
 from tournament_website.tournament_models.category import Category
 
+
 class TestTournamentClass:
     df1 = Fighter(name="df1", weight=50, belt_number=0, age=20, sex="M")
     df2 = Fighter(name="df2", weight=50, belt_number=0, age=20, sex="M")
@@ -21,8 +22,8 @@ class TestTournamentClass:
     df16 = Fighter(name="df16", weight=80, belt_number=2, age=30, sex="F")
     df17 = Fighter(name="df17", weight=80, belt_number=2, age=30, sex="F")
     df18 = Fighter(name="df18", weight=80, belt_number=2, age=30, sex="F")
-    fighter_list = [df1,df2,df3,df4,df5,df6,df7,df8,df9]
-    absolute_fighter_list = [df10,df11,df12,df13,df14,df15,df16,df17,df18]
+    fighter_list = [df1, df2, df3, df4, df5, df6, df7, df8, df9]
+    absolute_fighter_list = [df10, df11, df12, df13, df14, df15, df16, df17, df18]
     dtournament = Tournament(fighter_list, absolute_fighter_list)
 
     def test_if_determine_category_returns_right_category(self):
@@ -85,7 +86,11 @@ class TestTournamentClass:
         category_dict = self.dtournament.return_active_categories()
         assert type(category_dict) == dict
         categories = tuple(self.dtournament.return_active_categories().keys())
-        assert categories == ("M-Adult-Rooster-White", "M-Adult-LightFeather-White", "M-Adult-Middle-White")
+        assert categories == (
+            "M-Adult-Rooster-White",
+            "M-Adult-LightFeather-White",
+            "M-Adult-Middle-White",
+        )
         rooster_category = tuple(category_dict["M-Adult-Rooster-White"])
         assert rooster_category == (self.df1, self.df2, self.df3, self.df4)
         lightfeather_category = tuple(category_dict["M-Adult-LightFeather-White"])
@@ -97,13 +102,17 @@ class TestTournamentClass:
         category_dict = self.dtournament.return_active_absolute_categories()
         assert type(category_dict) == dict
         categories = tuple(self.dtournament.return_active_absolute_categories().keys())
-        assert categories == ("F-Master-Absolute-Black", "F-Master-Absolute-Brown", "F-Master-Absolute-Purple")
+        assert categories == (
+            "F-Master-Absolute-Black",
+            "F-Master-Absolute-Brown",
+            "F-Master-Absolute-Purple",
+        )
         blackbelt_category = category_dict["F-Master-Absolute-Black"]
-        assert blackbelt_category == [self.df10,self.df11]
+        assert blackbelt_category == [self.df10, self.df11]
         brownbelt_category = category_dict["F-Master-Absolute-Brown"]
-        assert brownbelt_category == [self.df12,self.df13,self.df14]
+        assert brownbelt_category == [self.df12, self.df13, self.df14]
         purplebelt_category = category_dict["F-Master-Absolute-Purple"]
-        assert purplebelt_category == [self.df15,self.df16,self.df17,self.df18]
+        assert purplebelt_category == [self.df15, self.df16, self.df17, self.df18]
 
     def test_if_we_can_create_category_objects_in_category_dict(self):
         self.dtournament.create_category_objects()
