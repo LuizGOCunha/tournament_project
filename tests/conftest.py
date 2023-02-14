@@ -1,7 +1,7 @@
 import pytest
 
 from django.contrib.auth.models import User
-from tournament_website.models import FighterDjangoModel
+from tournament_website.models import FighterDjangoModel, TournamentDjangoModel
 
 # Scopes available for fixture:
 # "function" - Run once per function
@@ -89,3 +89,14 @@ def multiple_fighter_django_object(fighter_django_data):
         fighter_list.append(fighter)
 
     return fighter_list
+
+
+@pytest.fixture()
+def tournament_django_object():
+    name = "Test_Tournament"
+    participant_limit = 32
+    description = "A great Tournament"
+    tournament = TournamentDjangoModel.objects.create(
+        name=name, participant_limit=participant_limit, description=description
+    )
+    return tournament

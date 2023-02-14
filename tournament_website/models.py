@@ -48,7 +48,7 @@ class FighterDjangoModel(models.Model):
         default=None,
         blank=True,
         null=True,
-        related_name="participant",
+        related_name="participants",
     )
 
     def convert_to_tournament_model(self):
